@@ -61,7 +61,7 @@ void control_interface::rotina()
 
 
    // File reading
-   QFile file_1("../simulacaobase-master/robot_data.txt");
+   QFile file_1("../lambesujoVSSS_2021/robot_data.txt");
     if(file_1.open(QIODevice::ReadOnly))
         {
 
@@ -80,7 +80,7 @@ void control_interface::rotina()
             }
         }
     // File reading
-    QFile file_2("../simulacaobase-master/ball_data.txt");
+    QFile file_2("../lambesujoVSSS_2021/ball_data.txt");
     if(file_2.open(QIODevice::ReadOnly))
         {
 
@@ -99,7 +99,7 @@ void control_interface::rotina()
             }
         }
     //File reading
-    QFile file_3("../simulacaobase-master/path_data.txt");
+    QFile file_3("../lambesujoVSSS_2021/path_data.txt");
     if(file_3.open(QIODevice::ReadOnly))
         {
 
@@ -118,7 +118,7 @@ void control_interface::rotina()
             }
         }
     //File reading
-    QFile file_4("../simulacaobase-master/control_data.txt");
+    QFile file_4("../lambesujoVSSS_2021/control_data.txt");
     if(file_4.open(QIODevice::ReadOnly))
         {
 
