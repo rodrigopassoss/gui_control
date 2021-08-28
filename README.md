@@ -10,7 +10,17 @@ Interface para testes com os controladores desenvolvidos pela equipe de futebol 
 
 1 - Abra um novo terminal
 
-2 - use:
----
+2 - Vá para o diretório path/to/gui_control:
+```
+$ cd path/to/gui_control
+
+``` 
+3- Execute o binário (Você deve ter buildado antes):
+
+```
+$ ./gui_control
+
+``` 
+
 
 
