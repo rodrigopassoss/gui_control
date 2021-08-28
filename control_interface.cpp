@@ -41,6 +41,10 @@ control_interface::control_interface(QWidget *parent)
     ui->response_analysis->yAxis->setRange(-1.6, 1.6);
 
 
+    ui->plot_virtual->replot();
+    ui->response_analysis->replot();
+
+
 }
 
 control_interface::~control_interface()
@@ -57,7 +61,6 @@ void control_interface::rotina()
 
 
     //QVector<double> ydata_path;
-
 
 
    // File reading
@@ -166,8 +169,8 @@ void control_interface::rotina()
 
     ui->plot_virtual->replot();
     ui->response_analysis->replot();
-
-
+    for(int i=0;i<curr_flag;i++)
+        ui->plot_virtual->removeGraph(i);
 }
 
 
@@ -262,10 +265,16 @@ void control_interface::drawPath(QVector<double> caminho)
 {
     int p = ((caminho.size() - 1)/2)-1;
     cout << p << endl;
-    for (int i=0;i<p-1;i++)
+    bool flag=true;
+    int i=0;
+    QPen blackPen;
+    blackPen.setColor(QColor(0, 0, 0, 150));
+    blackPen.setStyle(Qt::SolidLine);
+    blackPen.setWidthF(2);
+    for (i=0;i<p-1;i++)
     {
         ui->plot_virtual->addGraph();
-        ui->plot_virtual->graph(curr_flag + i)->setPen(QPen(QColor(0, 0, 0)));
+        ui->plot_virtual->graph(curr_flag + i)->setPen(blackPen);
         ui->plot_virtual->graph(curr_flag + i)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 3));
         QVector<double> tmpx(2);
         QVector<double> tmpy(2);
@@ -277,6 +286,35 @@ void control_interface::drawPath(QVector<double> caminho)
 
         cout << "("<< tmpx.at(0) <<", " << tmpx.at(0) <<") ";
         cout << "-> "<< "("<< tmpx.at(1) <<", " << tmpx.at(2) <<")" << endl;
+        flag=false;
     }
+    if(flag==false)
+    {
+        //i=i+1;
+        ui->plot_virtual->addGraph();
+        ui->plot_virtual->graph(curr_flag + i)->setPen(blackPen);
+        ui->plot_virtual->graph(curr_flag + i)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 3));
+        QVector<double> tmpx(2);
+        QVector<double> tmpy(2);
+        tmpx[0]=caminho.at((2*i)+1);
+        tmpx[1]=caminho.at((2*(i+1))+1);
+        tmpy[0]=caminho.at((2*i)+2);
+        tmpy[1]=caminho.at((2*(i+1))+2);
+        ui->plot_virtual->graph(curr_flag + i)->setData(tmpx, tmpy);
+    }
+   /* else
+    {
+        ui->plot_virtual->addGraph();
+        ui->plot_virtual->graph(curr_flag)->setPen(QPen(QColor(0, 0, 0)));
+        ui->plot_virtual->graph(curr_flag)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 3));
+        QVector<double> tmpx(2);
+        QVector<double> tmpy(2);
+        tmpx[0]=caminho.at(1);
+        tmpy[0]=caminho.at(2);
+        tmpx[1]=caminho.at(3);
+        tmpy[1]=caminho.at(4);
+        ui->plot_virtual->graph(curr_flag)->setData(tmpx, tmpy);
+    }*/
+
 
 }
